@@ -5,6 +5,121 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blog — The Southerndecorum</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    .blog-col {
+      border: 1px solid var(--border);
+      background: var(--panel);
+      display: flex;
+      flex-direction: column;
+    }
+    .blog-col-header {
+      padding: 1rem 1.2rem 0.8rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .blog-col-title {
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+    .blog-col-count {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      color: var(--text-faint);
+      margin-left: auto;
+      letter-spacing: 0.08em;
+    }
+    .col-dot {
+      width: 7px;
+      height: 7px;
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+    .col-dot.intl  { background: var(--em);   box-shadow: var(--glow-sm); }
+    .col-dot.india { background: var(--gold);  box-shadow: var(--glow-gold); }
+    .col-dot.book  { background: #c084fc;      box-shadow: 0 0 8px rgba(192,132,252,0.4); }
+
+    .blog-col-body { padding: 0.5rem 0; flex: 1; }
+
+    .blog-article-link {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+      padding: 0.85rem 1.2rem;
+      text-decoration: none;
+      color: inherit;
+      border-bottom: 1px solid rgba(0,255,136,0.06);
+      transition: background 0.15s;
+    }
+    .blog-article-link:last-child { border-bottom: none; }
+    .blog-article-link:hover { background: rgba(0,255,136,0.04); }
+    .blog-article-link:hover .bal-title { color: var(--em); }
+
+    .bal-date {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      color: var(--text-faint);
+      letter-spacing: 0.06em;
+      line-height: 1.4;
+      flex-shrink: 0;
+      padding-top: 3px;
+      min-width: 34px;
+    }
+    .bal-content { flex: 1; }
+    .bal-title {
+      font-family: var(--sans);
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.3;
+      margin-bottom: 0.25rem;
+      transition: color 0.2s;
+    }
+    .bal-desc {
+      font-family: var(--serif);
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+    .bal-arrow {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--em);
+      opacity: 0;
+      transform: translateX(-4px);
+      transition: all 0.2s;
+      padding-top: 3px;
+      flex-shrink: 0;
+    }
+    .blog-article-link:hover .bal-arrow { opacity: 1; transform: translateX(0); }
+
+    .empty-state {
+      padding: 1.5rem 1.2rem;
+      text-align: center;
+    }
+    .empty-state p {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--text-faint);
+      letter-spacing: 0.1em;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 780px) {
+      .blog-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
 <div class="grid-bg"></div>
@@ -14,7 +129,6 @@
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="about.html">About</a></li>
-    
     <li><a href="blog.html" class="active">Blog</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
@@ -23,42 +137,70 @@
 <header class="page-header">
   <div class="header-tag">Writing // SD-004</div>
   <h1>The <em>Blog</em></h1>
-  <p class="header-sub">Essays, analyses, and reflections on international affairs and Indian foreign policy.</p>
-  <div class="header-divider"><span>blog.feed // awaiting first entry</span></div>
+  <p class="header-sub">Essays, analyses, and reflections — on world politics, Indian affairs, and the books that shape both.</p>
+  <div class="header-divider"><span>blog.feed // 3 channels active</span></div>
 </header>
 
 <main class="inner">
 
-  <p style="font-family:var(--serif);font-size:1rem;color:var(--text-dim);font-style:italic;margin-bottom:2.5rem;line-height:1.85;">
-    This is where I write more freely — on current events in the Indo-Pacific, theoretical debates in IR, books I am reading, and questions I am working through. New writing will appear here regularly. Each article below links to its own page.
-  </p>
+  <div class="blog-grid">
 
-  <!-- HOW TO ADD AN ARTICLE:
-       1. Ask Claude to write your article as an HTML file
-       2. Upload the file to GitHub (e.g. article-quad-india-2025.html)
-       3. Copy the blog-entry block below and fill in the details
-       4. Update the href to point to your new file
-  -->
-
-  <div class="blog-list">
-
-    <!-- PLACEHOLDER — replace with your first real article -->
-    <a href="article-template.html" class="blog-entry">
-      <div class="blog-date">Soon<br>2025</div>
-      <div>
-        <div class="blog-entry-title">First Article — Coming Soon</div>
-        <div class="blog-summary">Essays on Indo-Pacific security, Indian foreign policy, and geopolitics will be published here. Check back soon.</div>
-        <span class="blog-tag">Essay</span>
+    <!-- COLUMN 1: International Politics -->
+    <div class="blog-col">
+      <div class="blog-col-header">
+        <span class="col-dot intl"></span>
+        <span class="blog-col-title">International Politics</span>
+        <span class="blog-col-count">0 articles</span>
       </div>
-      <div class="blog-arrow">→</div>
-    </a>
+      <div class="blog-col-body">
+        <!-- ADD INTERNATIONAL POLITICS ARTICLES HERE -->
+        <!-- Example:
+        <a href="article-filename.html" class="blog-article-link">
+          <div class="bal-date">Apr<br>2025</div>
+          <div class="bal-content">
+            <div class="bal-title">Your Article Title</div>
+            <div class="bal-desc">One line summary of the piece.</div>
+          </div>
+          <div class="bal-arrow">→</div>
+        </a>
+        -->
+        <div class="empty-state">
+          <p>// articles coming<br>soon</p>
+        </div>
+      </div>
+    </div>
 
-    <!-- Add new entries above this line, most recent first -->
+    <!-- COLUMN 2: Indian Politics -->
+    <div class="blog-col">
+      <div class="blog-col-header">
+        <span class="col-dot india"></span>
+        <span class="blog-col-title">Indian Politics</span>
+        <span class="blog-col-count">0 articles</span>
+      </div>
+      <div class="blog-col-body">
+        <!-- ADD INDIAN POLITICS ARTICLES HERE -->
+        <div class="empty-state">
+          <p>// articles coming<br>soon</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- COLUMN 3: Book Review -->
+    <div class="blog-col">
+      <div class="blog-col-header">
+        <span class="col-dot book"></span>
+        <span class="blog-col-title">Book Review</span>
+        <span class="blog-col-count">0 reviews</span>
+      </div>
+      <div class="blog-col-body">
+        <!-- ADD BOOK REVIEWS HERE -->
+        <div class="empty-state">
+          <p>// reviews coming<br>soon</p>
+        </div>
+      </div>
+    </div>
 
   </div>
-
-
-
 
 </main>
 
