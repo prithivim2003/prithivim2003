@@ -313,3 +313,15 @@ footer::before { content: ''; position: absolute; top: 0; left: 0; right: 0; hei
   .blog-entry { grid-template-columns: 56px 1fr; } .blog-arrow { display: none; }
   footer { flex-direction: column; text-align: center; padding: 1.4rem 1rem; }
 }
+
+/* ══════════════════════════════════════════════════════
+   TRICOLOUR TITLE OVERRIDES
+   Applied via .clr-orange / .clr-white / .clr-green
+   classes added directly on words in the HTML.
+   !important is used because these override more specific
+   existing rules (e.g. .site-h1 em, .nav-brand span) that
+   were previously forcing everything to gold.
+   ══════════════════════════════════════════════════════ */
+.clr-orange { color: #ff9933 !important; text-shadow: 0 0 8px rgba(255,153,51,0.45) !important; }
+.clr-white  { color: #ffffff !important; text-shadow: 0 0 8px rgba(255,255,255,0.35) !important; }
+.clr-green  { color: var(--em) !important; text-shadow: var(--glow-sm) !important; }
